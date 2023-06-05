@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "app-user")
+@NoArgsConstructor
 public class AppUser {
 
     @Id

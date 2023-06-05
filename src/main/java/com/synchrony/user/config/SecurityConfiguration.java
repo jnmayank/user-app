@@ -17,7 +17,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.POST,"/users/register").hasAuthority("admin")
+                        .requestMatchers(HttpMethod.POST,"/users/register").permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                         .anyRequest().authenticated())
                 .headers(header -> header.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
@@ -31,12 +31,4 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder(9);
     }
 
-
-  /*  @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider  daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userSecurityService);
-        return daoAuthenticationProvider;
-    }*/
 }
